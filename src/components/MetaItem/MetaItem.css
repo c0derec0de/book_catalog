@@ -1,0 +1,12 @@
+.meta__item {
+    display: flex;
+    gap: 10px;
+    font-size: 15px;
+    line-height: 1.4;
+    color: #444;
+}
+
+.item__label {
+    font-weight: 600;
+    min-width: 100px;
+}

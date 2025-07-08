@@ -1,63 +1,74 @@
 .bookcard {
-    width: 200px;
-    height: 450px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    overflow: hidden;
+    width: 220px;
+    height: 460px;
+    border-radius: 16px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
     display: flex;
     flex-direction: column;
-    background: white;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+}
+
+.bookcard:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
 .bookcard__container {
     display: flex;
     flex-direction: column;
     height: 100%;
+    text-align: center;
 }
 
 .cover {
-    height: 200px; 
+    height: 240px;
     width: 100%;
     overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #f5f5f5;
-    flex-shrink: 0; 
+    background-color: #f9f9f9;
+    flex-shrink: 0;
 }
 
 .cover__image {
-    width: 100%;
     height: 100%;
-    object-fit: contain; 
-    object-position: center;
+    width: auto;
+    max-width: 100%;
+    object-fit: contain;
     transition: transform 0.3s ease;
 }
 
+.cover__image:hover {
+    transform: scale(1.05);
+}
+
 .description {
-    padding: 10px;
+    padding: 12px;
     display: flex;
     flex-direction: column;
-    flex-grow: 1; 
-    overflow: hidden; 
+    flex-grow: 1;
+    gap: 8px;
 }
 
 .description__title {
-    font-size: 16px;
-    font-weight: 500;
-    background-color: rgb(231, 233, 249);
-    border-radius: 5px;
-    padding: 5px;
-    margin-bottom: 8px;
-    white-space: nowrap;
+    font-size: 15px;
+    font-weight: 600;
+    color: #1d1d1d;
+    background-color: #ffe5e5;
+    border-radius: 8px;
+    padding: 6px 10px;
     overflow: hidden;
+    white-space: nowrap;
     text-overflow: ellipsis;
 }
 
 .description__actors {
     font-size: 14px;
-    color: #555;
-    margin-bottom: 8px;
+    color: #6c6c6c;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -65,63 +76,51 @@
 
 .description__text {
     font-size: 13px;
-    color: #666;
-    flex-grow: 1; 
+    color: #888;
+    flex-grow: 1;
     overflow: hidden;
     display: -webkit-box;
     -webkit-box-orient: vertical;
+    line-height: 1.4;
+    text-align: left;
 }
 
-.favourite {
-    margin-top: auto; 
-    padding: 0 10px 10px 0;
+.bookcard__favourite {
+    padding: 10px;
     display: flex;
     justify-content: flex-end;
 }
 
 .favourite__button {
-    width: 60px;
-    height: 25px;
-    border-radius: 5px;
-    background-color: rgb(163, 157, 217);
     border: none;
+    border-radius: 24px;
+    padding: 6px 14px;
+    font-size: 13px;
+    font-weight: 500;
     cursor: pointer;
-    font-size: 12px;
-    transition: all 0.2s ease;
+    transition: background-color 0.3s ease;
+    color: #fff;
+    background-color: #bab3b4;
 }
 
-.favourite__buttonactive {
-    width: 60px;
-    height: 25px;
-    border-radius: 5px;
-    background-color: rgb(105, 93, 214);
+.favourite__button-active {
     border: none;
+    border-radius: 24px;
+    padding: 6px 14px;
+    font-size: 13px;
+    font-weight: 500;
     cursor: pointer;
-    font-size: 12px;
-    transition: all 0.2s ease;
+    transition: background-color 0.3s ease;
+    color: #fff;
+    background-color: #d62828;
 }
 
-.favourite__button:hover {
-    background-color: rgb(105, 93, 214);
-    color: white;
+.favourite__button:hover,
+.favourite__buttonactive:hover {
+    background-color: #d62828;
 }
 
-.favourite__button:active {
-    transform: scale(0.95);
-}
-
-.description__title:hover::after {
-    content: attr(title);
-    position: absolute;
-    left: 10px;
-    top: 100%;
-    background: white;
-    padding: 8px 12px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.15);
-    z-index: 10;
-    white-space: normal;
-    width: 180px;
-    font-size: 14px;
+.favourite__button:active,
+.favourite__buttonactive:active {
+    transform: scale(0.96);
 }

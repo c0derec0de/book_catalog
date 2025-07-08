@@ -1,0 +1,23 @@
+.books-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 200px); 
+    justify-content: center; 
+    gap: 50px;
+    margin-top: 50px;
+    width: 100%;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.books-grid:not(:has(:nth-child(5))) {
+    justify-content: flex-start; 
+}
+
+.empty-message {
+    grid-column: 1 / -1;
+    text-align: center;
+    font-size: 1.2rem;
+    color: #666;
+    margin-top: 50px;
+}

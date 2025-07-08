@@ -7,7 +7,7 @@ export const fetchBooks = async (query, startIndex = 0, additionalFilters = '') 
             q: query,
             startIndex: startIndex,
             maxResults: MAX_ITEMS,
-            ...(additionalFilters && { filter: additionalFilters }), // Исправлено здесь
+            ...(additionalFilters && { filter: additionalFilters }),
         };
         
         const response = await fetch(`${API_URL}?${new URLSearchParams(params)}`);
