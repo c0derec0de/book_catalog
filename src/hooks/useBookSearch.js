@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 import { fetchBooks } from '../services/api';
 
 const DEFAULT_QUERY = 'javascript';
-const SCROLL_THROTTLE_DELAY = 200; // задержка для троттлинга
+const SCROLL_THROTTLE_DELAY = 200; 
 const SCROLL_LOAD_OFFSET = 500;
 
 export const useBookSearch = (initialQuery = DEFAULT_QUERY) => {
@@ -16,7 +16,7 @@ export const useBookSearch = (initialQuery = DEFAULT_QUERY) => {
   
   const loadingRef = useRef(false);
   const startIndexRef = useRef(0);
-  const lastScrollTimeRef = useRef(0); // реф троттлинга 
+  const lastScrollTimeRef = useRef(0);
 
 
   const filterUniqueBooks = (newBooks, currentBooks) => {
