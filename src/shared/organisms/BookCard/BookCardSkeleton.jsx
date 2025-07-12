@@ -1,6 +1,6 @@
 import React from "react";
 import './BookCardSkeleton.css';
-import '../../../styles/shimmer.css';
+import '../../styles/shimmer.css';
 
 const BookCardSkeleton = () => {
     return (

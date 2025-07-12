@@ -1,6 +1,6 @@
 import React from 'react';
 import './BookDetailsSkeleton.css';
-import '../../../styles/shimmer.css';
+import '../../shared/styles/shimmer.css';
 
 const BookDetailsSkeleton = () => {
     return (

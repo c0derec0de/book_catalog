@@ -55,42 +55,7 @@
     background-color: var(--primary-red);
     color: white;
   }
-  
-  .search {
-    display: flex;
-    align-items: center;
-  }
-  
-  .search__input {
-    width: 300px;
-    height: 36px;
-    padding: 0 15px;
-    font-size: 16px;
-    border: 1px solid #ddd;
-    border-radius: 24px 0 0 24px;
-    outline: none;
-    transition: border 0.3s;
-  }
-  
-  .search__input:focus {
-    border-color: var(--primary-red);
-  }
-  
-  .search__button {
-    height: 36px;
-    padding: 0 20px;
-    border: none;
-    border-radius: 0 24px 24px 0;
-    cursor: pointer;
-    font-weight: 500;
-    color: white;
-    background-color: var(--primary-red);
-    transition: background-color 0.3s;
-  }
-  
-  .search__button:hover {
-    background-color: #d62828;
-  }
+
   
   .filters {
     margin-left: 20px;
