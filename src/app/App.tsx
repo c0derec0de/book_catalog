@@ -1,9 +1,9 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Home } from "../pages/Home/Home.tsx";
-import { Favorite } from "../pages/Favorite/Favorite.jsx";
-import { BookDetails } from "../pages/BookDetails/BookDetails.tsx";
+import { Home } from "../pages/Home/Home";
+import { Favorite } from "../pages/Favorite/Favorite";
+import { BookDetails } from "../pages/BookDetails/BookDetails";
 import "./index.css";
 import React from "react";
 

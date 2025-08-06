@@ -1,7 +1,8 @@
-import { type Book } from "../../types/propsTypes";
+import { type Book } from "../../types/index";
 
 export const getFavorites = (): Book[] => {
-  return JSON.parse(localStorage.getItem("favoriteBooks") || "[]");
+  const favoritesJson = localStorage.getItem("favoriteBooks");
+  return favoritesJson ? (JSON.parse(favoritesJson) as Book[]) : [];
 };
 
 export const saveFavorites = (favorites: Book[]) => {

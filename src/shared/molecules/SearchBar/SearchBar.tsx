@@ -1,9 +1,6 @@
 import React from "react";
-import "./SearchBar.css";
-import {
-  type SearchBarProps,
-  type FilterOption,
-} from "../../../types/propsTypes";
+import "./SearchBar";
+import { type SearchBarProps, type FilterOption } from "../../../types/index";
 
 const FILTER_OPTION: FilterOption[] = [
   { value: "", label: "All books" },

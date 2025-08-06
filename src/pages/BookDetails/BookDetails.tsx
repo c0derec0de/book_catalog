@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import DOMPurify from "dompurify";
-import { fetchBook } from "../../services/api/api.ts";
+import { fetchBook } from "../../services/api/api";
 import coverImage from "../../assets/images/cover.jpg";
-import "./BookDetails.css";
-import { Header } from "../../shared/organisms/Header/Header.jsx";
-import { BookDetailsSkeleton } from "./BookDetailsSkeleton.jsx";
-import { MetaItem } from "../../shared/atoms/MetaItem/MetaItem.tsx";
-import { type Book } from "../../types/propsTypes.ts";
+import "./BookDetails";
+import { Header } from "../../shared/organisms/Header/Header";
+import { BookDetailsSkeleton } from "./BookDetailsSkeleton";
+import { MetaItem } from "../../shared/atoms/MetaItem/MetaItem";
+import { type Book } from "../../types/index";
 
 export const BookDetails = () => {
   const { id } = useParams<string>();
@@ -16,6 +16,11 @@ export const BookDetails = () => {
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
+    if (!id) {
+      setLoading(false);
+      return;
+    }
+
     const loadBook = async () => {
       try {
         const data = await fetchBook(id);

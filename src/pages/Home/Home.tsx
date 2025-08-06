@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import "./Home.css";
-import { Header } from "../../shared/organisms/Header/Header.tsx";
-import { BookGrid } from "../../shared/organisms/BookGrid/BookGrid.tsx";
-import { useBookSearch } from "../../features/search/hooks/useBookSearch.ts";
+import "./Home";
+import { Header } from "../../shared/organisms/Header/Header";
+import { BookGrid } from "../../shared/organisms/BookGrid/BookGrid";
+import { useBookSearch } from "../../features/search/hooks/useBookSearch";
 
 export const Home = () => {
   const [isSearchFocused, setIsSearchFocused] = useState(false);

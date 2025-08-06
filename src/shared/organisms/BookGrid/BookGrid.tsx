@@ -1,8 +1,8 @@
 import React from "react";
-import { BookCardSkeleton } from "../BookCard/BookCardSkeleton.tsx";
-import { BookCard } from "../BookCard/BookCard.tsx";
-import "./BookGrid.css";
-import { type BookGridProps, type Book } from "../../../types/propsTypes.ts";
+import { BookCardSkeleton } from "../BookCard/BookCardSkeleton";
+import { BookCard } from "../BookCard/BookCard";
+import "./BookGrid";
+import { type BookGridProps, type Book } from "../../../types/index";
 
 export const BookGrid: React.FC<BookGridProps> = ({
   books,

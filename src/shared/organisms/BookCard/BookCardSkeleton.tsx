@@ -1,5 +1,4 @@
-import React from "react";
-import "./BookCardSkeleton.css";
+import "./BookCardSkeleton";
 import "../../styles/shimmer.css";
 
 export const BookCardSkeleton = () => {

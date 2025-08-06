@@ -1,5 +1,5 @@
 import React from "react";
-import "./BookDetailsSkeleton.css";
+import "./BookDetailsSkeleton";
 import "../../shared/styles/shimmer.css";
 
 export const BookDetailsSkeleton = () => {

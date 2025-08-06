@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./Header.css";
-import { SearchBar } from "../../molecules/SearchBar/SearchBar.tsx";
-import { type HeaderProps } from "../../../types/propsTypes";
+import "./Header";
+import { SearchBar } from "../../molecules/SearchBar/SearchBar";
+import { type HeaderProps } from "../../../types/index";
 
 export const Header: React.FC<HeaderProps> = ({
   searchInput,

@@ -5,15 +5,15 @@ import {
   isBookFavorite,
   addFavorite,
   removeFavorite,
-} from "../../../services/storage/favourite.ts";
+} from "../../../services/storage/favourite";
 import {
   getShortTitle,
   getAuthors,
   getDescription,
-} from "../../../utils/bookUtils.ts";
+} from "../../../utils/bookUtils";
 import coverImage from "../../../assets/images/cover.jpg";
 import "./BookCard.css";
-import { type BookCardProps } from "../../../types/propsTypes.ts";
+import { type BookCardProps } from "../../../types/index";
 
 export const BookCard: React.FC<BookCardProps> = ({
   book,

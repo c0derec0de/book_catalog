@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
-import { type Book, type UseFavoriteReturn } from "../../../types/propsTypes";
+import { type UseFavoriteReturn } from "../../../types/index";
+import { type Book } from "../../../types/book.types";
 
 export const useFavorite = (initialSearch: string = ""): UseFavoriteReturn => {
   const [allBooks, setAllBooks] = useState<Book[]>([]);

@@ -1,7 +1,8 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { toast } from "react-toastify";
-import { fetchBooks } from "../../../services/api/api.ts";
-import { type Book, type UseBookSearchReturn } from "../../../types/propsTypes";
+import { fetchBooks } from "../../../services/api/api";
+import { type UseBookSearchReturn } from "../../../types/index";
+import { type Book } from "../../../types/book.types";
 
 const DEFAULT_QUERY = "javascript";
 const SCROLL_THROTTLE_DELAY = 200;
