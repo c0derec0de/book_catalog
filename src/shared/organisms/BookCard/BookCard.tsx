@@ -5,12 +5,12 @@ import {
   isBookFavorite,
   addFavorite,
   removeFavorite,
-} from "../../../services/storage/favourite";
+} from "../../../services/storage/favourite.ts";
 import {
   getShortTitle,
   getAuthors,
   getDescription,
-} from "../../../utils/bookUtils";
+} from "../../../utils/bookUtils.ts";
 import coverImage from "../../../assets/images/cover.jpg";
 import "./BookCard.css";
 import { type BookCardProps } from "../../../types/propsTypes.ts";

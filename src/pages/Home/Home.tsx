@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import "./Home.css";
-import Header from "../../shared/organisms/Header/Header.jsx";
-import BookGrid from "../../shared/organisms/BookGrid/BookGrid.jsx";
-import { useBookSearch } from "../../features/search/hooks/useBookSearch.js";
+import Header from "../../shared/organisms/Header/Header.tsx";
+import BookGrid from "../../shared/organisms/BookGrid/BookGrid.tsx";
+import { useBookSearch } from "../../features/search/hooks/useBookSearch.ts";
 
 const Home = () => {
   const [isSearchFocused, setIsSearchFocused] = useState(false);
@@ -13,7 +13,6 @@ const Home = () => {
     setSearchInput,
     filter,
     handleSearch,
-    handleKeyPress,
     handleFilterChange,
   } = useBookSearch("javascript");
 
@@ -25,12 +24,12 @@ const Home = () => {
       <Header
         searchInput={searchInput}
         setSearchInput={setSearchInput}
-        onSearch={handleSearch}
-        onKeyPress={handleKeyPress}
+        onSearch={() => handleSearch()}
         filterValue={filter}
-        onFilterChange={handleFilterChange}
+        onFilterChange={(value) => handleFilterChange(value)}
         onSearchFocus={handleSearchFocus}
         onSearchBlur={handleSearchBlur}
+        showSearch={isSearchFocused}
       />
       <BookGrid books={books} loading={loading} emptyMessage="No books found" />
     </div>

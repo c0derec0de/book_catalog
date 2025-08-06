@@ -1,8 +1,8 @@
 import React from "react";
-import Header from "../../shared/organisms/Header/Header";
+import Header from "../../shared/organisms/Header/Header.tsx";
 import BookCard from "../../shared/organisms/BookCard/BookCard.tsx";
-import BookGrid from "../../shared/organisms/BookGrid/BookGrid";
-import { useFavorite } from "../../features/favorite/hooks/useFavorite";
+import BookGrid from "../../shared/organisms/BookGrid/BookGrid.tsx";
+import { useFavorite } from "../../features/favorite/hooks/useFavorite.ts";
 import "./Favorite.css";
 
 const Favorite = () => {
@@ -14,7 +14,6 @@ const Favorite = () => {
     isSearchFocused,
     removeBook,
     handleSearch,
-    handleKeyPress,
     handleSearchFocus,
     handleSearchBlur,
   } = useFavorite();
@@ -32,7 +31,6 @@ const Favorite = () => {
         searchInput={searchInput}
         setSearchInput={setSearchInput}
         onSearch={handleSearch}
-        onKeyPress={handleKeyPress}
         onSearchFocus={handleSearchFocus}
         onSearchBlur={handleSearchBlur}
       />

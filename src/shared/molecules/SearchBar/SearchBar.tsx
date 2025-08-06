@@ -1,7 +1,20 @@
 import React from "react";
 import "./SearchBar.css";
+import {
+  type SearchBarProps,
+  type FilterOption,
+} from "../../../types/propsTypes";
 
-const SearchBar = ({
+const FILTER_OPTION: FilterOption[] = [
+  { value: "", label: "All books" },
+  { value: "ebooks", label: "eBooks" },
+  { value: "free-ebooks", label: "Free eBooks" },
+  { value: "full", label: "Full view" },
+  { value: "paid-ebooks", label: "Paid eBooks" },
+  { value: "partial", label: "Partial view" },
+];
+
+const SearchBar: React.FC<SearchBarProps> = ({
   searchInput,
   setSearchInput,
   onSearch,
@@ -10,16 +23,7 @@ const SearchBar = ({
   filterValue,
   onFilterChange,
 }) => {
-  const filterOptions = [
-    { value: "", label: "All books" },
-    { value: "ebooks", label: "eBooks" },
-    { value: "free-ebooks", label: "Free eBooks" },
-    { value: "full", label: "Full view" },
-    { value: "paid-ebooks", label: "Paid eBooks" },
-    { value: "partial", label: "Partial view" },
-  ];
-
-  const handleKeyPress = (e) => {
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       onSearch?.();
     }
@@ -38,7 +42,7 @@ const SearchBar = ({
           onFocus={onSearchFocus}
           onBlur={onSearchBlur}
         />
-        <button onClick={onSearch} className="search__button">
+        <button onClick={() => onSearch?.()} className="search__button">
           Search
         </button>
       </div>
@@ -48,7 +52,7 @@ const SearchBar = ({
           onChange={(e) => onFilterChange?.(e.target.value)}
           className="filter-dropdown"
         >
-          {filterOptions.map((option) => (
+          {FILTER_OPTION.map((option) => (
             <option key={option.value} value={option.value}>
               {option.label}
             </option>
