@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { toast } from "react-toastify";
-import { fetchBooks } from "../../../services/api/api";
+import { fetchBooks } from "../../../services/api/api.ts";
 import { type Book, type UseBookSearchReturn } from "../../../types/propsTypes";
 
 const DEFAULT_QUERY = "javascript";

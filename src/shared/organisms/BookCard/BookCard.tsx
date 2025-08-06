@@ -15,7 +15,7 @@ import coverImage from "../../../assets/images/cover.jpg";
 import "./BookCard.css";
 import { type BookCardProps } from "../../../types/propsTypes.ts";
 
-const BookCard: React.FC<BookCardProps> = ({
+export const BookCard: React.FC<BookCardProps> = ({
   book,
   isFavorite = false,
   onRemove,
@@ -83,5 +83,3 @@ const BookCard: React.FC<BookCardProps> = ({
     </div>
   );
 };
-
-export default BookCard;

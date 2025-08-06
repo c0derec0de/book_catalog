@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import "./Home.css";
-import Header from "../../shared/organisms/Header/Header.tsx";
-import BookGrid from "../../shared/organisms/BookGrid/BookGrid.tsx";
+import { Header } from "../../shared/organisms/Header/Header.tsx";
+import { BookGrid } from "../../shared/organisms/BookGrid/BookGrid.tsx";
 import { useBookSearch } from "../../features/search/hooks/useBookSearch.ts";
 
-const Home = () => {
+export const Home = () => {
   const [isSearchFocused, setIsSearchFocused] = useState(false);
   const {
     books,
@@ -35,5 +35,3 @@ const Home = () => {
     </div>
   );
 };
-
-export default Home;

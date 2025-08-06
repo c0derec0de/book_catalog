@@ -2,15 +2,15 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import DOMPurify from "dompurify";
-import { fetchBook } from "../../services/api/api.js";
+import { fetchBook } from "../../services/api/api.ts";
 import coverImage from "../../assets/images/cover.jpg";
 import "./BookDetails.css";
-import Header from "../../shared/organisms/Header/Header.jsx";
-import BookDetailsSkeleton from "./BookDetailsSkeleton.jsx";
-import MetaItem from "../../shared/atoms/MetaItem/MetaItem.tsx";
+import { Header } from "../../shared/organisms/Header/Header.jsx";
+import { BookDetailsSkeleton } from "./BookDetailsSkeleton.jsx";
+import { MetaItem } from "../../shared/atoms/MetaItem/MetaItem.tsx";
 import { type Book } from "../../types/propsTypes.ts";
 
-const BookDetails = () => {
+export const BookDetails = () => {
   const { id } = useParams<string>();
   const [book, setBook] = useState<Book>();
   const [loading, setLoading] = useState<boolean>(true);
@@ -121,5 +121,3 @@ const BookDetails = () => {
     </div>
   );
 };
-
-export default BookDetails;

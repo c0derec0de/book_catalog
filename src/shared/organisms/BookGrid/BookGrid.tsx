@@ -1,10 +1,10 @@
 import React from "react";
-import BookCardSkeleton from "../BookCard/BookCardSkeleton.tsx";
-import BookCard from "../BookCard/BookCard.tsx";
+import { BookCardSkeleton } from "../BookCard/BookCardSkeleton.tsx";
+import { BookCard } from "../BookCard/BookCard.tsx";
 import "./BookGrid.css";
 import { type BookGridProps, type Book } from "../../../types/propsTypes.ts";
 
-const BookGrid: React.FC<BookGridProps> = ({
+export const BookGrid: React.FC<BookGridProps> = ({
   books,
   loading,
   emptyMessage = "No books found",
@@ -35,5 +35,3 @@ const BookGrid: React.FC<BookGridProps> = ({
     </div>
   );
 };
-
-export default BookGrid;

@@ -2,7 +2,7 @@ import React from "react";
 import "./MetaItem.css";
 import { type MetaItemProps } from "../../../types/propsTypes.ts";
 
-const MetaItem: React.FC<MetaItemProps> = ({ label, value }) => {
+export const MetaItem: React.FC<MetaItemProps> = ({ label, value }) => {
   return (
     <div className="meta__item">
       <span className="item__label">{label}</span>
@@ -10,5 +10,3 @@ const MetaItem: React.FC<MetaItemProps> = ({ label, value }) => {
     </div>
   );
 };
-
-export default MetaItem;

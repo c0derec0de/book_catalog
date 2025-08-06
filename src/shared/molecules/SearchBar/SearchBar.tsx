@@ -14,7 +14,7 @@ const FILTER_OPTION: FilterOption[] = [
   { value: "partial", label: "Partial view" },
 ];
 
-const SearchBar: React.FC<SearchBarProps> = ({
+export const SearchBar: React.FC<SearchBarProps> = ({
   searchInput,
   setSearchInput,
   onSearch,
@@ -62,5 +62,3 @@ const SearchBar: React.FC<SearchBarProps> = ({
     </div>
   );
 };
-
-export default SearchBar;
