@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "../../shared/organisms/Header/Header";
-import BookCard from "../../shared/organisms/BookCard/BookCard";
+import BookCard from "../../shared/organisms/BookCard/BookCard.tsx";
 import BookGrid from "../../shared/organisms/BookGrid/BookGrid";
 import { useFavorite } from "../../features/favorite/hooks/useFavorite";
 import "./Favorite.css";

@@ -7,7 +7,7 @@ import coverImage from "../../assets/images/cover.jpg";
 import "./BookDetails.css";
 import Header from "../../shared/organisms/Header/Header.jsx";
 import BookDetailsSkeleton from "./BookDetailsSkeleton.jsx";
-import MetaItem from "../../shared/atoms/MetaItem/MetaItem.jsx";
+import MetaItem from "../../shared/atoms/MetaItem/MetaItem.tsx";
 
 const BookDetails = () => {
   const { id } = useParams();
@@ -87,7 +87,10 @@ const BookDetails = () => {
               <MetaItem label="Publisher: " value={volumeInfo.publisher} />
             )}
             {volumeInfo.pageCount && (
-              <MetaItem label="Pages: " value={volumeInfo.pageCount} />
+              <MetaItem
+                label="Pages: "
+                value={volumeInfo.pageCount.toString()}
+              />
             )}
             {volumeInfo.language && (
               <MetaItem
