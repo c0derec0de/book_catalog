@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import "./Home";
+import { useState } from "react";
+import "./Home.css";
 import { Header } from "../../shared/organisms/Header/Header";
 import { BookGrid } from "../../shared/organisms/BookGrid/BookGrid";
 import { useBookSearch } from "../../features/search/hooks/useBookSearch";
@@ -24,12 +24,12 @@ export const Home = () => {
       <Header
         searchInput={searchInput}
         setSearchInput={setSearchInput}
-        onSearch={() => handleSearch()}
+        onSearch={handleSearch}
         filterValue={filter}
-        onFilterChange={(value) => handleFilterChange(value)}
+        onFilterChange={handleFilterChange}
         onSearchFocus={handleSearchFocus}
         onSearchBlur={handleSearchBlur}
-        showSearch={isSearchFocused}
+        showSearch={true}
       />
       <BookGrid books={books} loading={loading} emptyMessage="No books found" />
     </div>

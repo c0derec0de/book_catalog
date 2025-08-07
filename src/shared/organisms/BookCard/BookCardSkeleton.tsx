@@ -1,4 +1,4 @@
-import "./BookCardSkeleton";
+import "./BookCardSkeleton.css";
 import "../../styles/shimmer.css";
 
 export const BookCardSkeleton = () => {

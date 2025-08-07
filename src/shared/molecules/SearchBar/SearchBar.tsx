@@ -1,17 +1,9 @@
 import React from "react";
-import "./SearchBar";
-import { type SearchBarProps, type FilterOption } from "../../../types/index";
+import "./SearchBar.css";
+import { type CommonSearchProps, type BookFilter } from "../../../types/index";
+import { FILTER_OPTIONS } from "../../../constants/constantsFilter";
 
-const FILTER_OPTION: FilterOption[] = [
-  { value: "", label: "All books" },
-  { value: "ebooks", label: "eBooks" },
-  { value: "free-ebooks", label: "Free eBooks" },
-  { value: "full", label: "Full view" },
-  { value: "paid-ebooks", label: "Paid eBooks" },
-  { value: "partial", label: "Partial view" },
-];
-
-export const SearchBar: React.FC<SearchBarProps> = ({
+export const SearchBar: React.FC<CommonSearchProps> = ({
   searchInput,
   setSearchInput,
   onSearch,
@@ -46,10 +38,10 @@ export const SearchBar: React.FC<SearchBarProps> = ({
       <div className="filters">
         <select
           value={filterValue}
-          onChange={(e) => onFilterChange?.(e.target.value)}
+          onChange={(e) => onFilterChange?.(e.target.value as BookFilter)}
           className="filter-dropdown"
         >
-          {FILTER_OPTION.map((option) => (
+          {FILTER_OPTIONS.map((option) => (
             <option key={option.value} value={option.value}>
               {option.label}
             </option>

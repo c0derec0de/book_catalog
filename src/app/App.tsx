@@ -5,7 +5,6 @@ import { Home } from "../pages/Home/Home";
 import { Favorite } from "../pages/Favorite/Favorite";
 import { BookDetails } from "../pages/BookDetails/BookDetails";
 import "./index.css";
-import React from "react";
 
 export function App() {
   return (

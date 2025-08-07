@@ -1,19 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./Header";
+import "./Header.css";
 import { SearchBar } from "../../molecules/SearchBar/SearchBar";
 import { type HeaderProps } from "../../../types/index";
 
-export const Header: React.FC<HeaderProps> = ({
-  searchInput,
-  setSearchInput,
-  onSearch,
-  filterValue,
-  onFilterChange,
-  onSearchFocus,
-  onSearchBlur,
-  showSearch = true,
-}) => {
+export const Header: React.FC<HeaderProps> = (props) => {
   return (
     <header className="header">
       <div className="header__container">
@@ -26,17 +17,17 @@ export const Header: React.FC<HeaderProps> = ({
           </Link>
         </div>
 
-        {showSearch && (
+        {props.showSearch ? (
           <SearchBar
-            searchInput={searchInput}
-            setSearchInput={setSearchInput}
-            onSearch={onSearch}
-            onSearchFocus={onSearchFocus}
-            onSearchBlur={onSearchBlur}
-            filterValue={filterValue}
-            onFilterChange={onFilterChange}
+            searchInput={props.searchInput}
+            setSearchInput={props.setSearchInput}
+            onSearch={props.onSearch}
+            onSearchFocus={props.onSearchFocus}
+            onSearchBlur={props.onSearchBlur}
+            filterValue={props.filterValue}
+            onFilterChange={props.onFilterChange}
           />
-        )}
+        ) : null}
       </div>
     </header>
   );

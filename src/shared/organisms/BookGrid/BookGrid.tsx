@@ -1,7 +1,7 @@
 import React from "react";
 import { BookCardSkeleton } from "../BookCard/BookCardSkeleton";
 import { BookCard } from "../BookCard/BookCard";
-import "./BookGrid";
+import "./BookGrid.css";
 import { type BookGridProps, type Book } from "../../../types/index";
 
 export const BookGrid: React.FC<BookGridProps> = ({

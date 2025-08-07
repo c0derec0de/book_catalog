@@ -1,11 +1,11 @@
-import { type ShortTitleResult } from "../types/propsTypes";
+import { type ShortTitleResult } from "../types/index";
 
 export const getShortTitle = (
   title: string = "",
   maxLength: number = 50
 ): ShortTitleResult => {
   const fullTitle = title.trim() || "No title";
-  const shortTitle = fullTitle.split(".")[0].substring(0, maxLength);
+  const shortTitle = fullTitle.substring(0, maxLength);
   return {
     fullTitle,
     shortTitle,

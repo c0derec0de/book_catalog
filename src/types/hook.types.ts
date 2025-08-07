@@ -1,13 +1,13 @@
-import { type Book } from "./index";
+import { type Book, type BookFilter } from "./index";
 
 export type UseBookSearchReturn = {
   books: Book[];
   loading: boolean;
   searchInput: string;
   setSearchInput: React.Dispatch<string | ((prevState: string) => string)>;
-  filter: string;
+  filter: BookFilter;
   handleSearch: () => void;
-  handleFilterChange: (newFilter: string) => void;
+  handleFilterChange: (newFilter: BookFilter) => void;
 };
 
 export type UseFavoriteReturn = {

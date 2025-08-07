@@ -10,7 +10,7 @@ export const useFavorite = (initialSearch: string = ""): UseFavoriteReturn => {
   const [searchInput, setSearchInput] = useState<string>(initialSearch);
   const [isSearchFocused, setIsSearchFocused] = useState<boolean>(false);
 
-  useEffect(() => {
+  useEffect((): void => {
     const loadFavorites = () => {
       try {
         const favorites = JSON.parse(

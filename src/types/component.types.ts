@@ -1,4 +1,10 @@
 import { type Book } from "./index";
+import { FILTER_OPTIONS } from "../constants/constantsFilter";
+
+export type ComponentState<T> =
+  | { status: "loading" }
+  | { status: "success"; data: T }
+  | { status: "error"; error: Error };
 
 export type MetaItemProps = {
   label: string;
@@ -18,29 +24,36 @@ export type BookGridProps = {
   renderBook?: (book: Book) => React.ReactNode;
 };
 
-type CommonSearchProps = {
-  searchInput?: string;
-  setSearchInput?: (value: string) => void;
-  onSearch?: () => void;
-  onSearchFocus?: () => void;
-  onSearchBlur?: () => void;
-  filterValue?: string;
-  onFilterChange?: (value: string) => void;
-};
-
-export type SearchBarProps = CommonSearchProps;
-
-export type HeaderProps = CommonSearchProps & {
-  showSearch?: boolean;
-};
-
-export type FilterOption = {
-  value: string;
-  label: string;
-};
-
 export type ShortTitleResult = {
   fullTitle: string;
   shortTitle: string;
   isTruncated: boolean;
 };
+
+// использую typeguards (typeof)
+export type BookFilter = (typeof FILTER_OPTIONS)[number]["value"];
+
+export type FilterOption = {
+  value: BookFilter;
+  label: string;
+};
+
+// пытаюсь использовать подход Discriminated Unions
+export type CommonSearchProps = {
+  searchInput: string;
+  setSearchInput: (value: string) => void;
+  onSearch: () => void;
+  onSearchFocus: () => void;
+  onSearchBlur: () => void;
+  filterValue?: BookFilter;
+  onFilterChange?: (value: BookFilter) => void;
+};
+
+type HeaderWithoutSearchProps = {
+  showSearch?: false;
+};
+type HeaderWithSearchProps = CommonSearchProps & {
+  showSearch: true;
+};
+
+export type HeaderProps = HeaderWithSearchProps | HeaderWithoutSearchProps;

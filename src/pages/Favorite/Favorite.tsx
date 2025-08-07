@@ -1,4 +1,3 @@
-import React from "react";
 import { Header } from "../../shared/organisms/Header/Header";
 import { BookCard } from "../../shared/organisms/BookCard/BookCard";
 import { BookGrid } from "../../shared/organisms/BookGrid/BookGrid";
@@ -28,6 +27,7 @@ export const Favorite = () => {
       className={`favoritescreen ${isSearchFocused ? "search-focused" : ""}`}
     >
       <Header
+        showSearch={true}
         searchInput={searchInput}
         setSearchInput={setSearchInput}
         onSearch={handleSearch}

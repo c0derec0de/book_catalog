@@ -1,8 +1,11 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { toast } from "react-toastify";
 import { fetchBooks } from "../../../services/api/api";
-import { type UseBookSearchReturn } from "../../../types/index";
-import { type Book } from "../../../types/book.types";
+import {
+  type UseBookSearchReturn,
+  type Book,
+  type BookFilter,
+} from "../../../types/index";
 
 const DEFAULT_QUERY = "javascript";
 const SCROLL_THROTTLE_DELAY = 200;
@@ -14,7 +17,7 @@ export const useBookSearch = (
   const [books, setBooks] = useState<Book[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [query, setQuery] = useState<string>("");
-  const [filter, setFilter] = useState<string>("");
+  const [filter, setFilter] = useState<BookFilter>("");
   const [hasMore, setHasMore] = useState<boolean>(true);
   const [searchInput, setSearchInput] = useState<string>(initialQuery);
 
@@ -74,7 +77,7 @@ export const useBookSearch = (
   }, [loadBooks, searchInput]);
 
   const handleFilterChange = useCallback(
-    (newFilter: string): void => {
+    (newFilter: BookFilter): void => {
       setFilter(newFilter);
       startIndexRef.current = 0;
       loadBooks(true);

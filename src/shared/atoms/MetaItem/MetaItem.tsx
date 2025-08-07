@@ -1,5 +1,5 @@
 import React from "react";
-import "./MetaItem";
+import "./MetaItem.css";
 import { type MetaItemProps } from "../../../types/index";
 
 export const MetaItem: React.FC<MetaItemProps> = ({ label, value }) => {
