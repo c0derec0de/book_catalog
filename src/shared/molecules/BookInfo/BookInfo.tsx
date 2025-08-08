@@ -6,6 +6,38 @@ import "./BookInfo.css";
 export const BookInfo: React.FC<{ volumeInfo: Book["volumeInfo"] }> = ({
   volumeInfo,
 }) => {
+  const metaItems = [
+    {
+      label: "Authors:",
+      value: volumeInfo?.authors?.join(", "),
+      condition: !!volumeInfo?.authors && volumeInfo.authors.length > 0,
+    },
+    {
+      label: "Published:",
+      value: volumeInfo?.publishedDate,
+      condition: !!volumeInfo?.publishedDate,
+    },
+    {
+      label: "Publisher:",
+      value: volumeInfo?.publisher,
+      condition: !!volumeInfo?.publisher,
+    },
+    {
+      label: "Pages:",
+      value: volumeInfo?.pageCount?.toString(),
+      condition: !!volumeInfo?.pageCount && volumeInfo.pageCount > 0,
+    },
+    {
+      label: "Language:",
+      value: volumeInfo?.language?.toUpperCase(),
+      condition: !!volumeInfo?.language,
+    },
+    {
+      label: "Categories:",
+      value: volumeInfo?.categories?.join(", "),
+      condition: !!volumeInfo?.categories && volumeInfo.categories.length > 0,
+    },
+  ];
   return (
     <div className="bookdetails__book-info-section book-info-section">
       <h1 className="book-info-section__title">{volumeInfo?.title}</h1>
@@ -14,29 +46,15 @@ export const BookInfo: React.FC<{ volumeInfo: Book["volumeInfo"] }> = ({
       )}
 
       <div className="book-info-section__meta">
-        {volumeInfo?.authors && (
-          <MetaItem label="Authors: " value={volumeInfo.authors.join(", ")} />
-        )}
-        {volumeInfo?.publishedDate && (
-          <MetaItem label="Published: " value={volumeInfo.publishedDate} />
-        )}
-        {volumeInfo?.publisher && (
-          <MetaItem label="Publisher: " value={volumeInfo.publisher} />
-        )}
-        {volumeInfo?.pageCount && (
-          <MetaItem label="Pages: " value={volumeInfo.pageCount.toString()} />
-        )}
-        {volumeInfo?.language && (
-          <MetaItem
-            label="Language: "
-            value={volumeInfo.language.toUpperCase()}
-          />
-        )}
-        {volumeInfo?.categories && (
-          <MetaItem
-            label="Categories: "
-            value={volumeInfo.categories.join(", ")}
-          />
+        {metaItems.map(
+          (item) =>
+            item.condition && (
+              <MetaItem
+                key={item.label}
+                label={item.label}
+                value={String(item.value)}
+              />
+            )
         )}
       </div>
     </div>

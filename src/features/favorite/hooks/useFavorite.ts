@@ -1,7 +1,18 @@
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
-import { type UseFavoriteReturn } from "../../../types/index";
 import { type Book } from "../../../types/book.types";
+
+type UseFavoriteReturn = {
+  displayedBooks: Book[];
+  loading: boolean;
+  searchInput: string;
+  setSearchInput: (value: string) => void;
+  isSearchFocused: boolean;
+  removeBook: (bookId: string) => void;
+  handleSearch: () => void;
+  handleSearchFocus: () => void;
+  handleSearchBlur: () => void;
+};
 
 export const useFavorite = (initialSearch: string = ""): UseFavoriteReturn => {
   const [allBooks, setAllBooks] = useState<Book[]>([]);
@@ -10,7 +21,7 @@ export const useFavorite = (initialSearch: string = ""): UseFavoriteReturn => {
   const [searchInput, setSearchInput] = useState<string>(initialSearch);
   const [isSearchFocused, setIsSearchFocused] = useState<boolean>(false);
 
-  useEffect((): void => {
+  useEffect(() => {
     const loadFavorites = () => {
       try {
         const favorites = JSON.parse(
@@ -28,7 +39,7 @@ export const useFavorite = (initialSearch: string = ""): UseFavoriteReturn => {
     loadFavorites();
   }, []);
 
-  const removeBook = (bookId: string): void => {
+  const removeBook = (bookId: string) => {
     const favorites = JSON.parse(localStorage.getItem("favoriteBooks") || "[]");
     const updatedFavorites = favorites.filter(
       (book: Book): boolean => book.id !== bookId

@@ -1,15 +1,21 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { toast } from "react-toastify";
 import { fetchBooks } from "../../../services/api/api";
-import {
-  type UseBookSearchReturn,
-  type Book,
-  type BookFilter,
-} from "../../../types/index";
+import { type Book, type BookFilter } from "../../../types/index";
 
 const DEFAULT_QUERY = "javascript";
 const SCROLL_THROTTLE_DELAY = 200;
 const SCROLL_LOAD_OFFSET = 500;
+
+type UseBookSearchReturn = {
+  books: Book[];
+  loading: boolean;
+  searchInput: string;
+  setSearchInput: React.Dispatch<string | ((prevState: string) => string)>;
+  filter: BookFilter;
+  handleSearch: () => void;
+  handleFilterChange: (newFilter: BookFilter) => void;
+};
 
 export const useBookSearch = (
   initialQuery: string = DEFAULT_QUERY
@@ -67,7 +73,7 @@ export const useBookSearch = (
     [books, filter, searchInput]
   );
 
-  const handleSearch = useCallback((): void => {
+  const handleSearch = useCallback(() => {
     if (searchInput.trim() === "") {
       toast.info("All available books are shown");
     }
@@ -77,7 +83,7 @@ export const useBookSearch = (
   }, [loadBooks, searchInput]);
 
   const handleFilterChange = useCallback(
-    (newFilter: BookFilter): void => {
+    (newFilter: BookFilter) => {
       setFilter(newFilter);
       startIndexRef.current = 0;
       loadBooks(true);

@@ -13,7 +13,7 @@ import {
 } from "../../../utils/bookUtils";
 import coverImage from "../../../assets/images/cover.jpg";
 import "./BookCard.css";
-import { type BookCardProps } from "../../../types/index";
+import { type BookCardProps } from "./types";
 
 export const BookCard: React.FC<BookCardProps> = ({
   book,

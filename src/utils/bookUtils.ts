@@ -13,11 +13,11 @@ export const getShortTitle = (
   };
 };
 
-export const getAuthors = (authors: string[] | undefined): string => {
+export const getAuthors = (authors?: string[]): string => {
   return authors ? authors.join(", ") : "Unknown author";
 };
 
-export const getDescription = (description: string | undefined): string => {
+export const getDescription = (description?: string): string => {
   return description
     ? `${description.substring(0, 100)}...`
     : "No description available";

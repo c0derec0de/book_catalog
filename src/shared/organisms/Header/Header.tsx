@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./Header.css";
 import { SearchBar } from "../../molecules/SearchBar/SearchBar";
-import { type HeaderProps } from "../../../types/index";
+import { type HeaderProps } from "./types";
 
 export const Header: React.FC<HeaderProps> = (props) => {
   return (
