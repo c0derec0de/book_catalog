@@ -13,20 +13,21 @@ import {
 } from "../../../utils/bookUtils";
 import coverImage from "../../../assets/images/cover.jpg";
 import "./BookCard.css";
+import { type BookCardProps } from "./types";
 
-const BookCard = ({ book, isFavorite = false, onRemove }) => {
-  const [isLiked, setIsLiked] = useState(false);
+export const BookCard: React.FC<BookCardProps> = ({
+  book,
+  isFavorite = false,
+  onRemove,
+}) => {
+  const [isLiked, setIsLiked] = useState(() => isBookFavorite(book.id));
   const navigate = useNavigate();
-
-  useEffect(() => {
-    setIsLiked(isBookFavorite(book.id));
-  }, [book.id]);
 
   const handleAddToFavorite = () => {
     if (isLiked) {
       removeFavorite(book.id);
       toast.info("Book deleted from favorites");
-      if (isFavorite && typeof onRemove === "function") {
+      if (isFavorite && onRemove) {
         onRemove(book.id);
       }
     } else {
@@ -82,5 +83,3 @@ const BookCard = ({ book, isFavorite = false, onRemove }) => {
     </div>
   );
 };
-
-export default BookCard;

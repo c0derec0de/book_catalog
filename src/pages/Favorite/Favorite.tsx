@@ -1,11 +1,10 @@
-import React from "react";
-import Header from "../../shared/organisms/Header/Header";
-import BookCard from "../../shared/organisms/BookCard/BookCard";
-import BookGrid from "../../shared/organisms/BookGrid/BookGrid";
+import { Header } from "../../shared/organisms/Header/Header";
+import { BookCard } from "../../shared/organisms/BookCard/BookCard";
+import { BookGrid } from "../../shared/organisms/BookGrid/BookGrid";
 import { useFavorite } from "../../features/favorite/hooks/useFavorite";
 import "./Favorite.css";
 
-const Favorite = () => {
+export const Favorite = () => {
   const {
     displayedBooks,
     loading,
@@ -14,7 +13,6 @@ const Favorite = () => {
     isSearchFocused,
     removeBook,
     handleSearch,
-    handleKeyPress,
     handleSearchFocus,
     handleSearchBlur,
   } = useFavorite();
@@ -29,10 +27,10 @@ const Favorite = () => {
       className={`favoritescreen ${isSearchFocused ? "search-focused" : ""}`}
     >
       <Header
+        showSearch={true}
         searchInput={searchInput}
         setSearchInput={setSearchInput}
         onSearch={handleSearch}
-        onKeyPress={handleKeyPress}
         onSearchFocus={handleSearchFocus}
         onSearchBlur={handleSearchBlur}
       />
@@ -52,5 +50,3 @@ const Favorite = () => {
     </div>
   );
 };
-
-export default Favorite;

@@ -1,30 +1,46 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { toast } from "react-toastify";
 import { fetchBooks } from "../../../services/api/api";
+import { type Book, type BookFilter } from "../../../types/index";
 
 const DEFAULT_QUERY = "javascript";
 const SCROLL_THROTTLE_DELAY = 200;
 const SCROLL_LOAD_OFFSET = 500;
 
-export const useBookSearch = (initialQuery = DEFAULT_QUERY) => {
-  const [books, setBooks] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [query, setQuery] = useState("");
-  const [filter, setFilter] = useState("");
-  const [hasMore, setHasMore] = useState(true);
-  const [searchInput, setSearchInput] = useState(initialQuery);
+type UseBookSearchReturn = {
+  books: Book[];
+  loading: boolean;
+  searchInput: string;
+  setSearchInput: React.Dispatch<string | ((prevState: string) => string)>;
+  filter: BookFilter;
+  handleSearch: () => void;
+  handleFilterChange: (newFilter: BookFilter) => void;
+};
 
-  const loadingRef = useRef(false);
-  const startIndexRef = useRef(0);
-  const lastScrollTimeRef = useRef(0);
+export const useBookSearch = (
+  initialQuery: string = DEFAULT_QUERY
+): UseBookSearchReturn => {
+  const [books, setBooks] = useState<Book[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [query, setQuery] = useState<string>("");
+  const [filter, setFilter] = useState<BookFilter>("");
+  const [hasMore, setHasMore] = useState<boolean>(true);
+  const [searchInput, setSearchInput] = useState<string>(initialQuery);
 
-  const filterUniqueBooks = (newBooks, currentBooks) => {
+  const loadingRef = useRef<boolean>(false);
+  const startIndexRef = useRef<number>(0);
+  const lastScrollTimeRef = useRef<number>(0);
+
+  const filterUniqueBooks = (
+    newBooks: Book[],
+    currentBooks: Book[]
+  ): Book[] => {
     const bookIds = new Set(currentBooks.map((book) => book.id));
     return newBooks.filter((book) => !bookIds.has(book.id));
   };
 
   const loadBooks = useCallback(
-    async (reset = false) => {
+    async (reset: boolean = false) => {
       if (loadingRef.current) return;
 
       loadingRef.current = true;
@@ -66,15 +82,8 @@ export const useBookSearch = (initialQuery = DEFAULT_QUERY) => {
     loadBooks(true);
   }, [loadBooks, searchInput]);
 
-  const handleKeyPress = useCallback(
-    (e) => {
-      if (e.key === "Enter") handleSearch();
-    },
-    [handleSearch]
-  );
-
   const handleFilterChange = useCallback(
-    (newFilter) => {
+    (newFilter: BookFilter) => {
       setFilter(newFilter);
       startIndexRef.current = 0;
       loadBooks(true);
@@ -117,7 +126,6 @@ export const useBookSearch = (initialQuery = DEFAULT_QUERY) => {
     setSearchInput,
     filter,
     handleSearch,
-    handleKeyPress,
     handleFilterChange,
   };
 };

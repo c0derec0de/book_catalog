@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./Home.css";
-import Header from "../../shared/organisms/Header/Header.jsx";
-import BookGrid from "../../shared/organisms/BookGrid/BookGrid.jsx";
-import { useBookSearch } from "../../features/search/hooks/useBookSearch.js";
+import { Header } from "../../shared/organisms/Header/Header";
+import { BookGrid } from "../../shared/organisms/BookGrid/BookGrid";
+import { useBookSearch } from "../../features/search/hooks/useBookSearch";
 
-const Home = () => {
+export const Home = () => {
   const [isSearchFocused, setIsSearchFocused] = useState(false);
   const {
     books,
@@ -13,7 +13,6 @@ const Home = () => {
     setSearchInput,
     filter,
     handleSearch,
-    handleKeyPress,
     handleFilterChange,
   } = useBookSearch("javascript");
 
@@ -26,15 +25,13 @@ const Home = () => {
         searchInput={searchInput}
         setSearchInput={setSearchInput}
         onSearch={handleSearch}
-        onKeyPress={handleKeyPress}
         filterValue={filter}
         onFilterChange={handleFilterChange}
         onSearchFocus={handleSearchFocus}
         onSearchBlur={handleSearchBlur}
+        showSearch={true}
       />
       <BookGrid books={books} loading={loading} emptyMessage="No books found" />
     </div>
   );
 };
-
-export default Home;
