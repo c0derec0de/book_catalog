@@ -14,6 +14,7 @@ export const Home = () => {
     filter,
     handleSearch,
     handleFilterChange,
+    loaderRef,
   } = useBookSearch("javascript");
 
   const handleSearchFocus = () => setIsSearchFocused(true);
@@ -32,6 +33,7 @@ export const Home = () => {
         showSearch={true}
       />
       <BookGrid books={books} loading={loading} emptyMessage="No books found" />
+      <div ref={loaderRef} style={{ height: "20px" }} />
     </div>
   );
 };

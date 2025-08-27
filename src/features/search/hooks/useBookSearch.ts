@@ -4,17 +4,16 @@ import { fetchBooks } from "../../../services/api/api";
 import { type Book, type BookFilter } from "../../../types/index";
 
 const DEFAULT_QUERY = "javascript";
-const SCROLL_THROTTLE_DELAY = 200;
-const SCROLL_LOAD_OFFSET = 500;
 
 type UseBookSearchReturn = {
   books: Book[];
   loading: boolean;
   searchInput: string;
-  setSearchInput: React.Dispatch<string | ((prevState: string) => string)>;
+  setSearchInput: React.Dispatch<React.SetStateAction<string>>;
   filter: BookFilter;
   handleSearch: () => void;
   handleFilterChange: (newFilter: BookFilter) => void;
+  loaderRef: React.RefObject<HTMLDivElement | null>;
 };
 
 export const useBookSearch = (
@@ -22,14 +21,13 @@ export const useBookSearch = (
 ): UseBookSearchReturn => {
   const [books, setBooks] = useState<Book[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
-  const [query, setQuery] = useState<string>("");
+  const [query, setQuery] = useState<string>(initialQuery);
   const [filter, setFilter] = useState<BookFilter>("");
   const [hasMore, setHasMore] = useState<boolean>(true);
   const [searchInput, setSearchInput] = useState<string>(initialQuery);
 
-  const loadingRef = useRef<boolean>(false);
   const startIndexRef = useRef<number>(0);
-  const lastScrollTimeRef = useRef<number>(0);
+  const loaderRef = useRef<HTMLDivElement>(null);
 
   const filterUniqueBooks = (
     newBooks: Book[],
@@ -40,83 +38,78 @@ export const useBookSearch = (
   };
 
   const loadBooks = useCallback(
-    async (reset: boolean = false) => {
-      if (loadingRef.current) return;
-
-      loadingRef.current = true;
+    async (isNewSearch: boolean = false) => {
+      if (loading) return;
       setLoading(true);
 
       try {
-        const newStartIndex = reset ? 0 : startIndexRef.current;
-        const searchQuery = searchInput.trim() || "books";
+        const newStartIndex = isNewSearch ? 0 : startIndexRef.current;
+        const searchQuery = query.trim() || "books";
 
         const data = await fetchBooks(searchQuery, newStartIndex, filter);
-        const newBooks = data.items || [];
-        const uniqueNewBooks = filterUniqueBooks(newBooks, books);
+        const newBooks = data?.items || [];
 
-        if (reset && uniqueNewBooks.length === 0 && searchQuery !== "books") {
-          toast.info("Nothing was found for your query");
+        if (isNewSearch && newBooks.length === 0) {
+          toast.info("Ничего не найдено по вашему запросу");
         }
 
-        setBooks((prev) =>
-          reset ? uniqueNewBooks : [...prev, ...uniqueNewBooks]
-        );
-        startIndexRef.current = newStartIndex + uniqueNewBooks.length;
-        setHasMore(uniqueNewBooks.length > 0);
+        setBooks((prevBooks) => {
+          const uniqueNewBooks = isNewSearch
+            ? newBooks
+            : filterUniqueBooks(newBooks, prevBooks);
+          return isNewSearch
+            ? uniqueNewBooks
+            : [...prevBooks, ...uniqueNewBooks];
+        });
+
+        startIndexRef.current = newStartIndex + newBooks.length;
+        setHasMore(newBooks.length > 0);
       } catch (err) {
-        toast.error("Book loading error. Please try again later.");
+        console.error("Book loading error:", err);
+        toast.error("Ошибка загрузки книг. Пожалуйста, попробуйте позже.");
       } finally {
-        loadingRef.current = false;
         setLoading(false);
       }
     },
-    [books, filter, searchInput]
-  );
-
-  const handleSearch = useCallback(() => {
-    if (searchInput.trim() === "") {
-      toast.info("All available books are shown");
-    }
-    setQuery(searchInput.trim());
-    startIndexRef.current = 0;
-    loadBooks(true);
-  }, [loadBooks, searchInput]);
-
-  const handleFilterChange = useCallback(
-    (newFilter: BookFilter) => {
-      setFilter(newFilter);
-      startIndexRef.current = 0;
-      loadBooks(true);
-    },
-    [loadBooks]
+    [loading, query, filter]
   );
 
   useEffect(() => {
-    const controller = new AbortController();
     loadBooks(true);
-    return () => controller.abort();
   }, [query, filter]);
 
+  const handleSearch = () => setQuery(searchInput);
+  const handleFilterChange = (newFilter: BookFilter) => setFilter(newFilter);
+
   useEffect(() => {
-    const handleScroll = () => {
-      const now = Date.now();
+    if (!loaderRef.current || !hasMore) {
+      return;
+    }
 
-      // троттлинг
-      if (now - lastScrollTimeRef.current < SCROLL_THROTTLE_DELAY) return;
-      lastScrollTimeRef.current = now;
-
-      const { scrollTop, scrollHeight, clientHeight } =
-        document.documentElement;
-      const isNearBottom =
-        scrollTop + clientHeight >= scrollHeight - SCROLL_LOAD_OFFSET;
-
-      if (isNearBottom && !loadingRef.current && hasMore) {
-        loadBooks();
-      }
+    const observerOptions = {
+      root: null,
+      rootMargin: "0px 0px 200px 0px",
+      threshold: 0,
     };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const intersectionCallback = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && hasMore) {
+          loadBooks(false);
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(
+      intersectionCallback,
+      observerOptions
+    );
+
+    observer.observe(loaderRef.current);
+    // клинап
+    return () => {
+      observer.disconnect();
+    };
   }, [hasMore, loadBooks]);
 
   return {
@@ -127,5 +120,6 @@ export const useBookSearch = (
     filter,
     handleSearch,
     handleFilterChange,
+    loaderRef,
   };
 };
