@@ -2,6 +2,7 @@ import { useState, useRef, useEffect, useCallback } from "react";
 import { toast } from "react-toastify";
 import { fetchBooks } from "../../../services/api/api";
 import { type Book, type BookFilter } from "../../../types/index";
+import { useInfiniteScroll } from "../../loading/hooks/useInfiniteScroll";
 
 const DEFAULT_QUERY = "javascript";
 
@@ -27,7 +28,6 @@ export const useBookSearch = (
   const [searchInput, setSearchInput] = useState<string>(initialQuery);
 
   const startIndexRef = useRef<number>(0);
-  const loaderRef = useRef<HTMLDivElement>(null);
 
   const filterUniqueBooks = (
     newBooks: Book[],
@@ -81,36 +81,12 @@ export const useBookSearch = (
   const handleSearch = () => setQuery(searchInput);
   const handleFilterChange = (newFilter: BookFilter) => setFilter(newFilter);
 
-  useEffect(() => {
-    if (!loaderRef.current || !hasMore) {
-      return;
-    }
-
-    const observerOptions = {
-      root: null,
-      rootMargin: "0px 0px 200px 0px",
-      threshold: 0,
-    };
-
-    const intersectionCallback = (entries: IntersectionObserverEntry[]) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting && hasMore) {
-          loadBooks(false);
-        }
-      });
-    };
-
-    const observer = new IntersectionObserver(
-      intersectionCallback,
-      observerOptions
-    );
-
-    observer.observe(loaderRef.current);
-    // клинап
-    return () => {
-      observer.disconnect();
-    };
-  }, [hasMore, loadBooks]);
+  const loaderRef = useInfiniteScroll<HTMLDivElement>({
+    hasMore,
+    onLoadMore: () => loadBooks(false),
+    rootMargin: "0px 0px 200px 0px",
+    threshold: 0,
+  });
 
   return {
     books,
